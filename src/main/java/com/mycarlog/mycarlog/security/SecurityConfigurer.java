@@ -21,11 +21,9 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private MyUserDetailsService myUserDetailsService;
-    private String[] publicEndpoints = {"/auth/users/register", "/api/hello", "/auth/users/login",
-            "/api/topics", "/api/topics/{topicId}", "/api/topics/{topicId}/articles",
-            "/api/topics/{topicId}/articles/{articleId}", "/api/topics/{topicId}/articles/{articleId}/comments",
-            "/api/topics/{topicId}/articles/{articleId}/comments/{commentId}", "/auth/users", "/auth/users/profile/all",
-            "/auth/users/login/changepassword"
+    private String[] publicEndpoints = {"/auth/users/register", "/auth/users/login", "/api/brands",
+            "/auth/users", "/auth/users/profile/all", "/auth/users/login/changepassword", "/api/brands/{brandId}",
+            "/api/brands/name={name}"
 
     };
 
