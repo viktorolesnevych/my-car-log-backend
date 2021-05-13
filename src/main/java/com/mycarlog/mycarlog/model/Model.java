@@ -2,8 +2,11 @@ package com.mycarlog.mycarlog.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="models")
@@ -26,6 +29,10 @@ public class Model {
     @ManyToOne
     @JoinColumn(name="brand_id")
     private Brand brand;
+
+    @OneToMany(mappedBy = "model", orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Vehicle> vehicleList;
 
     public Model(){
 
@@ -85,5 +92,13 @@ public class Model {
 
     public void setBrand(Brand brand) {
         this.brand = brand;
+    }
+
+    public List<Vehicle> getVehicleList() {
+        return vehicleList;
+    }
+
+    public void setVehicleList(List<Vehicle> vehicleList) {
+        this.vehicleList = vehicleList;
     }
 }

@@ -1,6 +1,11 @@
 package com.mycarlog.mycarlog.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="logs")
@@ -18,6 +23,15 @@ public class Log {
 
     @Column
     private String imgLink;
+
+    @OneToMany(mappedBy = "log", orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Comment> commentList;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name="vehicle_id")
+    private Vehicle vehicle;
 
     public Log(){
 
@@ -70,5 +84,21 @@ public class Log {
                 ", content='" + content + '\'' +
                 ", imgLink='" + imgLink + '\'' +
                 '}';
+    }
+
+    public List<Comment> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
 }
