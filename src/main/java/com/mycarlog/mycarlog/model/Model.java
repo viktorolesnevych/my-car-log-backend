@@ -1,6 +1,8 @@
 package com.mycarlog.mycarlog.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -19,6 +21,11 @@ public class Model {
 
     @Column
     private String imgLink;
+
+    @JsonIgnore // To prevent StackOverflow when calling each other
+    @ManyToOne
+    @JoinColumn(name="brand_id")
+    private Brand brand;
 
     public Model(){
 
@@ -70,5 +77,13 @@ public class Model {
                 ", modelClass='" + modelClass + '\'' +
                 ", imgLink='" + imgLink + '\'' +
                 '}';
+    }
+
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
     }
 }

@@ -1,6 +1,10 @@
 package com.mycarlog.mycarlog.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="brands")
@@ -17,6 +21,9 @@ public class Brand {
     @Column
     private String slogan;
 
+    @OneToMany(mappedBy = "brand", orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Model> modelList;
 
     public Brand(){
 
@@ -58,5 +65,13 @@ public class Brand {
                 ", name='" + name + '\'' +
                 ", slogan='" + slogan + '\'' +
                 '}';
+    }
+
+    public List<Model> getModelList() {
+        return modelList;
+    }
+
+    public void setModelList(List<Model> modelList) {
+        this.modelList = modelList;
     }
 }
