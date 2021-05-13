@@ -10,6 +10,8 @@ import com.mycarlog.mycarlog.model.response.LoginResponse;
 import com.mycarlog.mycarlog.repository.ProfileRepository;
 import com.mycarlog.mycarlog.repository.UserRepository;
 import com.mycarlog.mycarlog.security.JWTUtils;
+import com.mycarlog.mycarlog.utilities.PasswordChange;
+import com.mycarlog.mycarlog.utilities.UserAdminHint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
