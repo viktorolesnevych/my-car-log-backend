@@ -29,7 +29,7 @@ public class BrandModelController {
     }
 
     // PUBLIC ENDPOINT, everybody has access (ID)
-    @GetMapping("/brands/id={brandId}")
+    @GetMapping("/brands/{brandId}")
     public Brand getBrand(@PathVariable Long brandId){
         return brandModelService.getBrand(brandId);
     }
@@ -41,19 +41,19 @@ public class BrandModelController {
     }
 
     // PUBLIC ENDPOINT, everybody has access
-    @GetMapping("/brands/id={brandId}/models")
+    @GetMapping("/brands/{brandId}/models")
     public List<?> getBrandModels(@PathVariable Long brandId){
         return brandModelService.getModels(brandId);
     }
 
-    @GetMapping("/brands/id={brandId}/models/id={modelId}")
+    @GetMapping("/brands/{brandId}/models/{modelId}")
     public Model getBrandModel(@PathVariable Long brandId, @PathVariable Long modelId){
-        return brandModelService.getModelInBrand(brandId,modelId);
+        return brandModelService.getModelInBrand(modelId,brandId);
     }
 
     @GetMapping("/brands/name={brandName}/models/name={modelName}")
     public Model getBrandModel(@PathVariable String brandName, @PathVariable String modelName){
-        return brandModelService.getModelInBrand(brandName,modelName);
+        return brandModelService.getModelInBrand(modelName, brandName);
     }
 
     // PUBLIC ENDPOINT, everybody has access
@@ -62,7 +62,7 @@ public class BrandModelController {
         return brandModelService.getModels();
     }
 
-    @GetMapping("/models/id={modelId}")
+    @GetMapping("/models/{modelId}")
     public Model getModel(@PathVariable Long modelId){
         return brandModelService.getModel(modelId);
     }
