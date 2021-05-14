@@ -1,7 +1,10 @@
 package com.mycarlog.mycarlog.service;
 
+import com.mycarlog.mycarlog.exception.InformationForbidden;
 import com.mycarlog.mycarlog.exception.InformationNotFoundException;
 import com.mycarlog.mycarlog.model.Log;
+import com.mycarlog.mycarlog.model.User;
+import com.mycarlog.mycarlog.model.Vehicle;
 import com.mycarlog.mycarlog.repository.BrandRepository;
 import com.mycarlog.mycarlog.repository.LogRepository;
 import com.mycarlog.mycarlog.repository.ModelRepository;
@@ -9,6 +12,7 @@ import com.mycarlog.mycarlog.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -60,5 +64,46 @@ public class LogService {
         utilityService.errorIfRepositoryElementNotExistById(vehicleRepository, vehicleId,"Vehicle");
         utilityService.errorIfRepositoryElementNotExistById(logRepository, logId,"Log");
         return logRepository.findById0AndVehicleId(logId, vehicleId);
+    }
+
+    public Log addLog(Long vehicleId, Log log){
+        User currentUser = utilityService.getAuthenticatedUser();
+        utilityService.errorIfRepositoryElementNotExistById(vehicleRepository, vehicleId, "Vehicle");
+        if (logRepository.findByTitleAndVehicleId(log.getTitle(), vehicleId).isEmpty())
+            throw new InformationNotFoundException("Log with title "+ log.getTitle() + " already exists");
+        Vehicle currentVehicle = vehicleRepository.findById(vehicleId).get();
+        if (currentUser.getId() != currentVehicle.getUser().getId())
+            throw new InformationForbidden("You cannot create logs on other vehicle pages");
+        log.setVehicle(currentVehicle);
+        return logRepository.save(log);
+    }
+
+    public Log updateLog(Long vehicleId, Long logId, Log log){
+        User currentUser = utilityService.getAuthenticatedUser();
+        utilityService.errorIfRepositoryElementNotExistById(vehicleRepository, vehicleId, "Vehicle");
+        utilityService.errorIfRepositoryElementNotExistById(logRepository, logId, "Log");
+        Vehicle currentVehicle = vehicleRepository.findById(vehicleId).get();
+        if (currentUser.getId() != currentVehicle.getUser().getId())
+            throw new InformationForbidden("You cannot update logs on other vehicle pages");
+        Log currentLog = logRepository.findById(logId).get();
+        if (currentLog.getVehicle().getId() != vehicleId)
+            throw new InformationNotFoundException("Log with id " + logId + " is outside of current vehicle page.");
+        if (log.getTitle() != null)   currentLog.setTitle(log.getTitle());
+        if (log.getContent() != null) currentLog.setContent(log.getContent());
+        if (log.getImgLink() != null) currentLog.setImgLink(log.getImgLink());
+        return logRepository.save(currentLog);
+    }
+
+    public void deleteLog(Long vehicleId, Long logId){
+        User currentUser = utilityService.getAuthenticatedUser();
+        utilityService.errorIfRepositoryElementNotExistById(vehicleRepository, vehicleId, "Vehicle");
+        utilityService.errorIfRepositoryElementNotExistById(logRepository, logId, "Log");
+        Vehicle currentVehicle = vehicleRepository.findById(vehicleId).get();
+        if (currentUser.getId() != currentVehicle.getUser().getId())
+            throw new InformationForbidden("You cannot delete logs on other vehicle pages");
+        Log currentLog = logRepository.findById(logId).get();
+        if (currentLog.getVehicle().getId() != vehicleId)
+            throw new InformationNotFoundException("Log with id " + logId + " is outside of current vehicle page.");
+        logRepository.deleteById(logId);
     }
 }

@@ -38,6 +38,5 @@ public class UtilityService {
     public void errorIfRepositoryElementsNotExist(JpaRepository repository, String elementName) {
         if (repository.findAll().isEmpty())
             throw new InformationNotFoundException("No any " + elementName + "s were found");
-
     }
 }

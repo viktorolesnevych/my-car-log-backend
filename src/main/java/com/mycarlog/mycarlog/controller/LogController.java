@@ -47,20 +47,20 @@ public class LogController {
     }
 
     //PRIVATE endpoint, registered users can have access
-    @PostMapping("vehicle/{id}/log")
-    public Vehicle createLog(@PathVariable Long id, @RequestBody Log log){
+    @PostMapping("vehicle/{id}/logs")
+    public Log createLog(@PathVariable Long id, @RequestBody Log log){
         return logService.addLog(id, log);
     }
 
     //PRIVATE endpoint, registered users can have access to their own topics only
-    @PutMapping("vehicle/{id}/log/{logId}")
-    public Vehicle updateLog(@PathVariable Long id, @PathVariable Long logId,
+    @PutMapping("vehicle/{id}/logs/{logId}")
+    public Log updateLog(@PathVariable Long id, @PathVariable Long logId,
                                  @RequestBody Log log){
-        return logService.updateVLog(id, logId, log);
+        return logService.updateLog(id, logId, log);
     }
 
     //PRIVATE endpoint, registered users can have access to their own topics only
-    @DeleteMapping("vehicle/{id}/log/{logId}")
+    @DeleteMapping("vehicle/{id}/logs/{logId}")
     public ResponseEntity<HashMap> deleteVehicle(@PathVariable Long id, @PathVariable Long logId){
         logService.deleteLog(id, logId);
         HashMap response = new HashMap();
