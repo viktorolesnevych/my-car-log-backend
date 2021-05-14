@@ -63,6 +63,4 @@ public class VehicleController {
         response.put("Response", "Vehicle with id " + vehicleId + " has been deleted");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
-
 }
