@@ -2,7 +2,6 @@ package com.mycarlog.mycarlog.service;
 
 import com.mycarlog.mycarlog.exception.InformationExistException;
 import com.mycarlog.mycarlog.exception.InformationForbidden;
-import com.mycarlog.mycarlog.exception.InformationNotFoundException;
 import com.mycarlog.mycarlog.model.Comment;
 import com.mycarlog.mycarlog.model.User;
 import com.mycarlog.mycarlog.repository.CommentRepository;
@@ -37,7 +36,7 @@ public class CommentService {
     }
 
     // PUBLIC USER has access, returns a single comment related to the log
-    public Comment getArticleComment(Long vehicleId, Long logId, Long commentId){
+    public Comment getLogComment(Long vehicleId, Long logId, Long commentId){
         utilityService.errorIfRepositoryElementNotExistById(vehicleRepository,vehicleId, "Vehicle");
         utilityService.errorIfRepositoryElementNotExistById(logRepository, logId,"Log");
         utilityService.errorIfRepositoryElementNotExistById(commentRepository,commentId,"Comment");
@@ -81,7 +80,7 @@ public class CommentService {
     }
 
     // AUTHENTICATED USER can delete his comment/Admin can delete all comments
-    public void deleteComment(Long vehicleId, Long logId, Long commentId, Comment commentObject){
+    public void deleteComment(Long vehicleId, Long logId, Long commentId){
         User currentUser = utilityService.getAuthenticatedUser();
         utilityService.errorIfRepositoryElementNotExistById(vehicleRepository,vehicleId, "Vehicle");
         utilityService.errorIfRepositoryElementNotExistById(logRepository, logId,"Log");
