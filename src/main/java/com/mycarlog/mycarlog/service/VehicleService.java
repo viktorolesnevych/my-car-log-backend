@@ -82,4 +82,21 @@ public class VehicleService {
         currentVehicle.setImgLink(vehicle.getImgLink());
         return vehicleRepository.save(vehicle);
     }
+
+    public void deleteVehicle(Long brandId, Long modelId, Long vehicleId){
+        User currentUser = utilityService.getAuthenticatedUser();
+        utilityService.errorIfRepositoryElementNotExistById(brandRepository, brandId, "Brand");
+        utilityService.errorIfRepositoryElementNotExistById(modelRepository, modelId,"Model");
+        utilityService.errorIfRepositoryElementNotExistById(vehicleRepository, vehicleId,"Vehicle");
+        if (modelRepository.findById(modelId).get().getBrand().getId() != brandId)
+            throw new InformationNotFoundException("Model with ID " + modelId + " belongs to a different brand");
+        if (vehicleRepository.findById(vehicleId).get().getModel().getId() != modelId)
+            throw new InformationNotFoundException("Vehicle with ID " + vehicleId + " belongs to a different model");
+        Vehicle currentVehicle = vehicleRepository.findById(vehicleId).get();
+        if ((currentVehicle.getUser().getId() != currentUser.getId()) || utilityService.isUserAdmin(currentUser))
+            vehicleRepository.deleteById(vehicleId);
+        else
+            throw new InformationNotFoundException("Vehicle with ID " + vehicleId + " belongs to a different user");
+    }
+
 }
