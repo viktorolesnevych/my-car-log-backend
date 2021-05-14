@@ -49,8 +49,9 @@ public class VehicleController {
 
     //PRIVATE endpoint, registered users can have access to their own topics only
     @PutMapping("/brands/{brandId}/models/{modelId}/vehicles/{vehicleId}")
-    public Vehicle updateVehicle(@PathVariable Long brandId, @PathVariable Long modelId, @RequestBody Vehicle vehicle){
-        return vehicleService.updateVehicle(brandId, modelId, vehicle);
+    public Vehicle updateVehicle(@PathVariable Long brandId, @PathVariable Long modelId, @PathVariable Long vehicleId,
+                                 @RequestBody Vehicle vehicle){
+        return vehicleService.updateVehicle(brandId, modelId, vehicleId, vehicle);
     }
 
     //PRIVATE endpoint, registered users can have access to their own topics only
