@@ -18,7 +18,7 @@ public class LogController {
     @Autowired
     private LogService logService;
 
-    // FULL CRUD NEEDED HERE AS WELL
+    // FULL CRUD OPERATIONS HERE FOR LOGS AS WELL
 
     @GetMapping("/logs")
     public List<?> getLogs(){
