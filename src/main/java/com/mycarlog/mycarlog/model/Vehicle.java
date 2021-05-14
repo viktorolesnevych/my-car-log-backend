@@ -39,15 +39,7 @@ public class Vehicle {
     @JoinColumn(name="model_id")
     private Model model;
 
-    @Override
-    public String toString() {
-        return "Vehicle{" +
-                "id=" + id +
-                ", color='" + color + '\'' +
-                ", description='" + description + '\'' +
-                ", imgLink='" + imgLink + '\'' +
-                '}';
-    }
+
 
     public Vehicle(){}
 
@@ -113,5 +105,18 @@ public class Vehicle {
 
     public void setModel(Model model) {
         this.model = model;
+    }
+
+    @Override
+    public String toString() {
+        return "Vehicle{" +
+                "id=" + id +
+                ", color='" + color + '\'' +
+                ", description='" + description + '\'' +
+                ", imgLink='" + imgLink + '\'' +
+                ", logList=" + logList +
+                ", user=" + user +
+                ", model=" + model +
+                '}';
     }
 }
