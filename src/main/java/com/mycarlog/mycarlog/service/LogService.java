@@ -61,7 +61,7 @@ public class LogService {
     public Log getLog(Long vehicleId, Long logId){
         utilityService.errorIfRepositoryElementNotExistById(vehicleRepository, vehicleId,"Vehicle");
         utilityService.errorIfRepositoryElementNotExistById(logRepository, logId,"Log");
-        return logRepository.findById0AndVehicleId(logId, vehicleId);
+        return logRepository.findByIdAndVehicleId(logId, vehicleId);
     }
 
     public Log addLog(Long vehicleId, Log log){

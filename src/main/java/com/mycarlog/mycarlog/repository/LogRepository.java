@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface LogRepository extends JpaRepository<Log, Long> {
     List<Log> findAllByVehicleId(Long vehicleId);
-    Log findById0AndVehicleId(Long id, Long vehicleId);
+    Log findByIdAndVehicleId(Long id, Long vehicleId);
     List<Log> findByTitleAndVehicleId(String title, Long vehicleId);
 }
