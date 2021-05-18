@@ -20,6 +20,9 @@ public class Vehicle {
     private String color;
 
     @Column
+    private String nickName;
+
+    @Column
     private String description;
 
     @Column
@@ -44,9 +47,10 @@ public class Vehicle {
     public Vehicle(){}
 
 
-    public Vehicle(Long id, String color, String description, String imgLink) {
+    public Vehicle(Long id, String color, String nickName, String description, String imgLink) {
         this.id = id;
         this.color = color;
+        this.nickName = nickName;
         this.description = description;
         this.imgLink = imgLink;
     }
@@ -107,11 +111,21 @@ public class Vehicle {
         this.model = model;
     }
 
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
     @Override
     public String toString() {
         return "Vehicle{" +
                 "id=" + id +
                 ", color='" + color + '\'' +
+                ", nickName='" + nickName + '\'' +
                 ", description='" + description + '\'' +
                 ", imgLink='" + imgLink + '\'' +
                 ", logList=" + logList +
