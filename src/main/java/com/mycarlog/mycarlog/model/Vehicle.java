@@ -99,6 +99,7 @@ public class Vehicle {
         return user;
     }
 
+
     public void setUser(User user) {
         this.user = user;
     }
@@ -118,6 +119,17 @@ public class Vehicle {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
+    }
+
+    public Long getUser_id(){
+        return this.user.getId();
+    }
+    public Long getModel_id(){
+        return this.model.getId();
+    }
+
+    public Long getBrand_id(){
+        return this.model.getBrand_id();
     }
 
     @Override

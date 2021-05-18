@@ -76,18 +76,14 @@ public class Model {
         this.imgLink = imgLink;
     }
 
-    @Override
-    public String toString() {
-        return "Model{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", modelClass='" + modelClass + '\'' +
-                ", imgLink='" + imgLink + '\'' +
-                '}';
-    }
+
 
     public Brand getBrand() {
         return brand;
+    }
+
+    public Long getBrand_id() {
+        return brand.getId();
     }
 
     public void setBrand(Brand brand) {
@@ -100,5 +96,17 @@ public class Model {
 
     public void setVehicleList(List<Vehicle> vehicleList) {
         this.vehicleList = vehicleList;
+    }
+
+    @Override
+    public String toString() {
+        return "Model{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", modelClass='" + modelClass + '\'' +
+                ", imgLink='" + imgLink + '\'' +
+                ", brandId=" + brand.getId() +
+                ", vehicleList=" + vehicleList +
+                '}';
     }
 }
