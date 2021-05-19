@@ -26,7 +26,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
             "/api/brands/name={name}", "/api/brands/{brandId}/models", "/api/brands/{brandId}/models/{modelId}",
             "/api/brands/name={brandName}/models/name={modelName}", "/api/models", "/api/models/{modelId}",
             "/api/models/name={modelName}", "/api/vehicles", "/api/vehicles/{id}", "/api/brands/{brandId}/models/{modelId}/vehicles",
-            "/api/brands/{brandId}/models/{modelId}/vehicles/{vehicleId}"
+            "/api/brands/{brandId}/models/{modelId}/vehicles/{vehicleId}", "/api/logs", "api/brands/{brandId}/models/{modelId}/logs"
     };
 
     @Autowired

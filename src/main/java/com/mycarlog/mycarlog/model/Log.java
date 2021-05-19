@@ -48,6 +48,10 @@ public class Log {
         return id;
     }
 
+    public Long getVehicle_id() {
+        return this.vehicle.getId();
+    }
+
     public void setId(Long id) {
         this.id = id;
     }

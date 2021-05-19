@@ -90,7 +90,8 @@ public class CommentService {
         if (commentRepository.findById(logId).get().getLog().getId() != logId)
             throw new InformationForbidden("Comment with ID " + commentId + " is within different log");
         Comment currentComment = commentRepository.findById(commentId).get();
-        if ((currentComment.getUser().getId() == currentUser.getId())|| utilityService.isUserAdmin(currentUser))
+        if ((currentComment.getUser().getId() == currentUser.getId())|| utilityService.isUserAdmin(currentUser)
+            || (currentUser.getId() == currentComment.getLog().getVehicle().getUser_id()))
             commentRepository.deleteById(commentId);
         else
             throw new InformationForbidden("You must be the original poster or an admin to delete this comment!");

@@ -69,6 +69,14 @@ public class Comment {
         return user;
     }
 
+    public Long getUser_id() {
+        return user.getId();
+    }
+
+    public Long getLog_id() {
+        return log.getId();
+    }
+
     public void setUser(User user) {
         this.user = user;
     }
