@@ -30,13 +30,13 @@ public class UtilityService {
     public void errorIfRepositoryElementNotExistById(JpaRepository repository, Long id, String elementName) {
         if (repository.findAll().isEmpty())
             throw new InformationNotFoundException("No " + elementName + "s were found");
-        if (repository.findById(id).isEmpty())
+        if (!repository.findById(id).isPresent())
             throw new InformationNotFoundException(elementName + " with ID " + id + " doesn't exist!");
     }
 
     // Will throw an error if some data is set incorrectly
     public void errorIfRepositoryElementsNotExist(JpaRepository repository, String elementName) {
-        if (repository.findAll().isEmpty())
+        if (repository.findAll() == null)
             throw new InformationNotFoundException("No any " + elementName + "s were found");
     }
 }
