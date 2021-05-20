@@ -93,7 +93,7 @@ public class VehicleService {
         if (vehicleRepository.findById(vehicleId).get().getModel().getId() != modelId)
             throw new InformationNotFoundException("Vehicle with ID " + vehicleId + " belongs to a different model");
         Vehicle currentVehicle = vehicleRepository.findById(vehicleId).get();
-        if ((currentVehicle.getUser().getId() != currentUser.getId()) || utilityService.isUserAdmin(currentUser))
+        if ((currentVehicle.getUser().getId() == currentUser.getId()) || utilityService.isUserAdmin(currentUser))
             vehicleRepository.deleteById(vehicleId);
         else
             throw new InformationNotFoundException("Vehicle with ID " + vehicleId + " belongs to a different user");
