@@ -127,6 +127,12 @@ public class Vehicle {
     public Long getModel_id(){
         return this.model.getId();
     }
+    public String getModel_name(){
+      return this.model.getName();
+    }
+    public String getBrand_name(){
+        return this.model.getBrand().getName();
+    }
 
     public Long getBrand_id(){
         return this.model.getBrand_id();
