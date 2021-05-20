@@ -67,7 +67,7 @@ public class LogService {
     public Log addLog(Long vehicleId, Log log){
         User currentUser = utilityService.getAuthenticatedUser();
         utilityService.errorIfRepositoryElementNotExistById(vehicleRepository, vehicleId, "Vehicle");
-        if (logRepository.findByTitleAndVehicleId(log.getTitle(), vehicleId).isEmpty())
+        if (!logRepository.findByTitleAndVehicleId(log.getTitle(), vehicleId).isEmpty())
             throw new InformationNotFoundException("Log with title "+ log.getTitle() + " already exists");
         Vehicle currentVehicle = vehicleRepository.findById(vehicleId).get();
         if (currentUser.getId() != currentVehicle.getUser().getId())
