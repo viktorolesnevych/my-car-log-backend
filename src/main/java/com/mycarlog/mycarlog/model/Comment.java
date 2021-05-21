@@ -85,6 +85,10 @@ public class Comment {
         return log;
     }
 
+    public String getUser_name(){
+        return this.user.getUserName();
+    }
+
     public void setLog(Log log) {
         this.log = log;
     }
