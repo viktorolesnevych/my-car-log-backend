@@ -37,7 +37,7 @@ public class CommentController {
         return commentService.updateComment(vehicleId, logId, commentId, commentObject);
     }
 
-    @DeleteMapping("/vehicles/{vehicleId}/logs/{logId}/comments{commentId}")
+    @DeleteMapping("/vehicles/{vehicleId}/logs/{logId}/comments/{commentId}")
     public ResponseEntity<HashMap> deleteComment(@PathVariable Long vehicleId, @PathVariable Long logId,
                                                  @PathVariable Long commentId){
         commentService.deleteComment(vehicleId, logId, commentId);
