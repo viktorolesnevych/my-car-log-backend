@@ -87,7 +87,7 @@ public class CommentService {
         utilityService.errorIfRepositoryElementNotExistById(commentRepository, commentId,"Comment");
         if (logRepository.findById(logId).get().getVehicle().getId() != vehicleId)
             throw new InformationForbidden("Log with ID " + logId + " belongs to a different vehicle page");
-        if (commentRepository.findById(logId).get().getLog().getId() != logId)
+        if (commentRepository.findById(commentId).get().getLog().getId() != logId)
             throw new InformationForbidden("Comment with ID " + commentId + " is within different log");
         Comment currentComment = commentRepository.findById(commentId).get();
         if ((currentComment.getUser().getId() == currentUser.getId()) || utilityService.isUserAdmin(currentUser)
